@@ -1,43 +1,48 @@
-var images = [
+const IMAGES = [
     'img/01.jpg',
     'img/02.jpg',
     'img/03.jpg',
     'img/04.jpg',
-    'img/05.jpg'
 ];
 
-var element = document.querySelector('.container');
+var element = document.querySelector('.game-container');
 
 // выводит базовые картинки
-for (let i = 0; i < 10; i++) {
-    var mainImage = document.createElement('div');
-    mainImage.className = 'main-image';
-    // mainImage.innerHTML = 'Hi';
-    element.appendChild(mainImage);
+function showCards() {
+    var imagesForPlay = IMAGES.concat(IMAGES);
+    for (let i = 0; i < imagesForPlay.length; i++) {
+        var blockImage = document.createElement('div');
+
+        blockImage.innerHTML = '<div class="front-image"></div><div><img class="back-image" src="' 
+                            + imagesForPlay[i] + '"></div>';
+        blockImage.className = 'block-image';
+        element.appendChild(blockImage);
+    }
 }
+
 
 var selectedDiv;
 
 element.onclick = function (event) {
     var target = event.target;
 
-    if (target.className != 'main-image') return;
+    if (target.className != 'front-image') return;
 
     turnOverPicture(target);
-} 
+}
+
 function turnOverPicture(node) {
-    if (selectedDiv) {
-        selectedDiv.classList.remove('new-color');
-    }
+    // if (selectedDiv) {
+    //     selectedDiv.classList.remove('new-color');
+    // }
 
     selectedDiv = node;
-    var newInage = document.createElement('img');
-    newInage.src = images[0];
-    newInage.classList.add('image-game');
-    selectedDiv.appendChild(newInage);
-    let pathImage = element.children[0].firstChild.src;
+    console.log(element.children);
+    node.className = 'front-image hide-image';
+    console.log(node);
 
-    console.log(pathImage.substring(pathImage.length - 6));
+    //console.log(pathImage.substring(pathImage.length - 6));
 }
 
 
+showCards();

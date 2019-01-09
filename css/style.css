@@ -1,29 +1,36 @@
 
-.container {
+.game-container {
     display: flex;
     flex-wrap: wrap;
-    max-width: 550px;
+    max-width: 700px;
 }
 
-.main-image {
-    width: 100px;
-    height: 90px;
-    border: solid;
-    border-color: black;
-    background-color: red;
-    margin: 2px;
+
+.block-image {
+    margin: 5px;
+    position: relative;
+  
+}
+  
+.front-image {
+    width: 150px;
+    height: 136px;
+    background-color: #3a78a1;
+    position: relative;
+    z-index: 100; 
+}
+  
+.back-image {
+    position: absolute;
+    top: 3px;
+    width: 150px;
+    height: 130px;
+    z-index: 90;
 }
 
-.new-color {
-    width: 100px;
-    height: 90px;
-    border: solid;
-    border-color: black;
-    background-color: blue;
-    margin: 2px;
+.hide-image {
+    z-index: 80;
 }
+  
+  
 
-.image-game {
-    width: 100px;
-    height: 90px;
-}
