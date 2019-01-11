@@ -5,44 +5,31 @@ const IMAGES = [
     'img/04.jpg',
 ];
 
-var element = document.querySelector('.game-container');
+var gameContainer = document.getElementById('game-container');
 
-// выводит базовые картинки
 function showCards() {
-    var imagesForPlay = IMAGES.concat(IMAGES);
-    for (let i = 0; i < imagesForPlay.length; i++) {
-        var blockImage = document.createElement('div');
-
-        blockImage.innerHTML = '<div class="front-image"></div><div><img class="back-image" src="' 
-                            + imagesForPlay[i] + '"></div>';
-        blockImage.className = 'block-image';
-        element.appendChild(blockImage);
-    }
+    let doubleImages = IMAGES.concat(IMAGES);
+    shuffle(doubleImages);
+    console.log(gameContainer);
+    
+    doubleImages.forEach(element => {
+        console.log(element);
+        let newDiv = document.createElement('div');
+        newDiv.innerHTML = `<div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front"></div>
+                                        <div class="flip-card-back">
+                                        <img class="image" src="${element}">
+                                        </div>
+                                    </div>
+                                </div>`;
+        gameContainer.appendChild(newDiv);
+    });
 }
-
-
-var selectedDiv;
-
-element.onclick = function (event) {
-    var target = event.target;
-
-    if (target.className != 'front-image') return;
-
-    turnOverPicture(target);
-}
-
-function turnOverPicture(node) {
-    // if (selectedDiv) {
-    //     selectedDiv.classList.remove('new-color');
-    // }
-
-    selectedDiv = node;
-    console.log(element.children);
-    node.className = 'front-image hide-image';
-    console.log(node);
-
-    //console.log(pathImage.substring(pathImage.length - 6));
-}
-
 
 showCards();
+
+function shuffle(o) {
+    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
