@@ -7,27 +7,35 @@ const IMAGES = [
 
 var gameContainer = document.getElementById('game-container');
 
+showCards();
+
 function showCards() {
     let doubleImages = IMAGES.concat(IMAGES);
     shuffle(doubleImages);
-    console.log(gameContainer);
-    
+
     doubleImages.forEach(element => {
-        console.log(element);
-        let newDiv = document.createElement('div');
-        newDiv.innerHTML = `<div class="flip-card">
-                                    <div class="flip-card-inner">
-                                        <div class="flip-card-front"></div>
-                                        <div class="flip-card-back">
-                                        <img class="image" src="${element}">
-                                        </div>
-                                    </div>
-                                </div>`;
-        gameContainer.appendChild(newDiv);
+        // console.log(element);
+        let card = document.createElement('div');
+        card.classList.add('flip-card');
+        let item = element.split('/')[1];
+        card.dataset.item = item;
+        card.innerHTML = `<div class="flip-card-front"></div>
+                                <div class="flip-card-back">
+                                <img class="image" src="${element}">
+                            </div>`;
+        gameContainer.appendChild(card);
     });
 }
 
-showCards();
+gameContainer.addEventListener('click', flipCard);
+
+function flipCard(event) {
+
+    console.log(event.target);
+
+    event.target.classList.add('flip');
+}
+
 
 function shuffle(o) {
     for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
